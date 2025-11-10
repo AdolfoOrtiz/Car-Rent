@@ -42,7 +42,6 @@ fun LoginScreen() {
                     .clip(CircleShape)
             )
 
-
             Spacer(modifier = Modifier.height(16.dp))
 
             // Botón "Ingresar"
@@ -68,6 +67,8 @@ fun LoginScreen() {
             ) {
                 Text(text = "Registrarse", color = Color.White)
             }
+
+            //Alonso estuvo aqui
         }
     }
 }
