@@ -20,13 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.carrentv1.R
 
-@Preview
+
 @Composable
-fun TerminosYCondicionesScreenResponsive(
-    onBackClick: () -> Unit = {}
-) {
+fun TerminosYCondicionesScreenResponsive(navController: NavController) {
     val configuration = LocalConfiguration.current
     val orientation = configuration.orientation
 
@@ -62,7 +61,7 @@ fun TerminosYCondicionesScreenResponsive(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        IconButton(onClick = onBackClick, modifier = Modifier.align(Alignment.Start)) {
+                        IconButton(onClick = { /* Acción de regresar */ }, modifier = Modifier.align(Alignment.Start)) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
                                 contentDescription = "Regresar",
@@ -123,12 +122,8 @@ fun TerminosYCondicionesScreenResponsive(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
-                    IconButton(onClick = onBackClick) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Regresar",
-                            tint = Color.Black
-                        )
+                    IconButton(onClick = { /* Acción de regresar */ }, modifier = Modifier.align(Alignment.Start)) {
+
                     }
 
                     Spacer(modifier = Modifier.height(10.dp))

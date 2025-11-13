@@ -1,4 +1,4 @@
-package com.example.carrentv1
+package com.example.carrentv1.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,20 +9,20 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.carrentv1.Navegation.AppScreens
 import com.example.carrentv1.R
 
-@Preview
 @Composable
-fun LoginScreen() {
-    // Fondo blanco y contenido centrado
+fun InicioScreen(navController: NavController) {
+    // Fondo blano y contenido centrado
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -35,7 +35,7 @@ fun LoginScreen() {
         ) {
             // Imagen del logo
             Image(
-                painter = painterResource(id = R.drawable.car_rent), // 🔹 Coloca tu imagen en res/drawable/ic_car.xml o .png
+                painter = painterResource(id = R.drawable.car_rent),
                 contentDescription = "Logo Car-Rent",
                 modifier = Modifier
                     .size(100.dp)
@@ -46,7 +46,7 @@ fun LoginScreen() {
 
             // Botón "Ingresar"
             Button(
-                onClick = { /* Navegar a pantalla de login */ },
+                onClick = { navController.navigate(route = AppScreens.Login.route) },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7EB6FF)),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
@@ -58,7 +58,7 @@ fun LoginScreen() {
 
             // Botón "Registrarse"
             Button(
-                onClick = { /* Navegar a pantalla de registro */ },
+                onClick = { navController.navigate(route = AppScreens.Registro.route) },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7EB6FF)),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
@@ -67,10 +67,7 @@ fun LoginScreen() {
             ) {
                 Text(text = "Registrarse", color = Color.White)
             }
-
-            //Alonso estuvo aqui
         }
     }
 }
-
 

@@ -13,43 +13,26 @@ import com.google.accompanist.navigation.animation.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.carrentv1.Navegation.AppNavegation
+import com.example.carrentv1.Screens.InicioScreen
+import com.example.carrentv1.Screens.PantallaInicio
+import com.example.registroapp.ui.screens.RegistroScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppNavigation()
+            AppNavegation()
+
         }
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
+
+@Preview
 @Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
-
-    AnimatedNavHost(
-        navController = navController,
-        startDestination = "splash",
-        enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) + fadeIn() },
-        exitTransition = { slideOutHorizontally(targetOffsetX = { -1000 }) + fadeOut() },
-        popEnterTransition = { fadeIn(animationSpec = tween(700)) },
-        popExitTransition = { fadeOut(animationSpec = tween(700)) }
-    ) {
-        composable("splash") { SplashScreen(navController) }
-        composable("login") { LoginScreen() }
-    }
-}
-
-@Composable
-fun SplashScreen(navController: NavHostController) {
-
-    LaunchedEffect(Unit) {
-        delay(3000)
-        navController.navigate("login") {
-            popUpTo("splash") { inclusive = true }
-        }
-    }
-    PantallaInicio()
+fun DefaultPreview() {
+    AppNavegation()
 }
