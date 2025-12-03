@@ -30,7 +30,7 @@ fun RestablecerContrasenaScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp)
@@ -49,7 +49,7 @@ fun RestablecerContrasenaScreen(navController: NavController) {
             text = "Car-Rent",
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF1565C0),
+            color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center
         )
 
@@ -59,7 +59,7 @@ fun RestablecerContrasenaScreen(navController: NavController) {
         Text(
             text = "Restablece tu contraseña",
             fontSize = 18.sp,
-            color = Color(0xFF666666),
+            color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
@@ -71,25 +71,34 @@ fun RestablecerContrasenaScreen(navController: NavController) {
             text = "Confirma tu correo electrónico",
             fontSize = 16.sp,
             fontWeight = FontWeight.Medium,
-            color = Color(0xFF333333),
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.fillMaxWidth()
         )
 
         // Campo de correo electrónico
         OutlinedTextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = { email = it }, // Corregido 'onValuechange' a 'onValueChange'
             label = { Text("E-Mail") },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Email,
                     contentDescription = "Email",
-                    tint = Color(0xFF1565C0)
+                    tint = MaterialTheme.colorScheme.primary
                 )
             },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
+                focusedLabelColor = MaterialTheme.colorScheme.primary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
+                cursorColor = MaterialTheme.colorScheme.primary,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
+            )
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -97,12 +106,21 @@ fun RestablecerContrasenaScreen(navController: NavController) {
         // Campo de nueva contraseña
         OutlinedTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = { password = it }, // Corregido 'onValuechange' a 'onValueChange'
             label = { Text("Nueva Contraseña") },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
+                focusedLabelColor = MaterialTheme.colorScheme.primary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
+                cursorColor = MaterialTheme.colorScheme.primary,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
+            )
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -110,12 +128,21 @@ fun RestablecerContrasenaScreen(navController: NavController) {
         // Campo de confirmar contraseña
         OutlinedTextField(
             value = confirmPassword,
-            onValueChange = { confirmPassword = it },
+            onValueChange = { confirmPassword = it }, // Corregido 'onValuechange' a 'onValueChange'
             label = { Text("Confirmar Contraseña") },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
+                focusedLabelColor = MaterialTheme.colorScheme.primary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
+                cursorColor = MaterialTheme.colorScheme.primary,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
+            )
         )
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -127,15 +154,14 @@ fun RestablecerContrasenaScreen(navController: NavController) {
                 .fillMaxWidth()
                 .height(56.dp),
             shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1565C0))
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
         ) {
             Text(
                 text = "Restablecer contraseña",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
     }
 }
-

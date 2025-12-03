@@ -15,18 +15,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.carrentv1.Navegation.AppScreens
 import com.example.carrentv1.R
 
 @Composable
 fun InicioScreen(navController: NavController) {
-    // Fondo blano y contenido centrado
+    // Fondo y contenido centrado
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -46,28 +45,33 @@ fun InicioScreen(navController: NavController) {
 
             // Botón "Ingresar"
             Button(
-                onClick = { navController.navigate(route = AppScreens.Login.route) },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7EB6FF)),
+                onClick = { navController.navigate(AppScreens.Login.route) },
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
                     .width(200.dp)
                     .height(48.dp)
             ) {
-                Text(text = "Ingresar", color = Color.White)
+                Text(text = "Ingresar", color = MaterialTheme.colorScheme.onPrimary)
             }
 
             // Botón "Registrarse"
             Button(
-                onClick = { navController.navigate(route = AppScreens.Registro.route) },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7EB6FF)),
+                onClick = { navController.navigate(AppScreens.Registro.route) },
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
                     .width(200.dp)
                     .height(48.dp)
             ) {
-                Text(text = "Registrarse", color = Color.White)
+                Text(text = "Registrarse", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun InicioScreenPreview() {
+    InicioScreen(rememberNavController())
+}

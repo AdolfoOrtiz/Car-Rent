@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -27,13 +28,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
@@ -41,6 +45,13 @@ android {
 
 dependencies {
 
+    // *** Firebase BOM (controla versiones automáticamente)
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+
+    // Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Jetpack Compose
     implementation("androidx.compose.material3:material3:1.3.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -52,7 +63,19 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.foundation.layout)
-    //implementation(libs.androidx.compose.foundation)
+
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0")) // Asegúrate de tener el BOM
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0")) // Usa la versión más reciente
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation(libs.androidx.foundation) // O la versión más reciente que uses para Coil
+
+    // DataStore para preferencias de usuario (tema)
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -61,7 +84,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
+    // Navegación Compose
     implementation("androidx.navigation:navigation-compose:2.8.0")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.36.0")
-
 }

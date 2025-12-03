@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.carrentv1.Screens.CarDetailScreen
+
 import com.example.carrentv1.Screens.ConfiguracionScreen
 import com.example.carrentv1.Screens.ContactoScreen
 import com.example.carrentv1.Screens.InicioScreen
@@ -19,12 +19,17 @@ import com.example.carrentv1.Screens.ResumenPagoScreen
 import com.example.carrentv1.Screens.SoporteTecnicoScreen
 import com.example.carrentv1.ui.screens.PantallaAutos
 import com.example.carrentv1.ui.screens.TerminosYCondicionesScreenResponsive
-import com.example.loginui.PantallaLoginScreen
-import com.example.registroapp.ui.screens.RegistroScreen
+import androidx.navigation.navArgument // Importar navArgument
+import androidx.navigation.NavType // Importar NavType
+import com.example.carrentv1.Screens.CarDetailScreen // Importación CORREGIDA
+
+import com.example.carrentv1.Navegation.AppScreens
+import com.example.carrentv1.RegistroScreen
+import com.example.carrentv1.Screens.PantallaLoginScreen
 
 
 @Composable
-fun AppNavegation (){
+fun  AppNavegation (){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = AppScreens.Inicio.route){
         composable(route = AppScreens.Inicio.route){
@@ -42,17 +47,34 @@ fun AppNavegation (){
         composable(route = AppScreens.dashboard.route){
             PantallaAutos(navController)
         }
-        composable(route = AppScreens.detalleAuto.route){
-            CarDetailScreen(navController)
+        composable(
+            route = AppScreens.detalleAuto.route, // Usar la ruta del object directamente con el placeholder
+            arguments = listOf(navArgument("carId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val carId = backStackEntry.arguments?.getString("carId")
+            CarDetailScreen(navController, carId = carId) // ¡Pasar el carId a CarDetailScreen!
         }
         composable(route = AppScreens.RentaAuto.route){
             RentCarForm(navController)
         }
-        composable(route = AppScreens.AlquilarAuto.route){
-            NuevoAlquilerScreen(navController)
+        composable(
+            route = AppScreens.AlquilarAuto.route,
+            arguments = listOf(navArgument("carId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val carId = backStackEntry.arguments?.getString("carId")
+            NuevoAlquilerScreen(navController, carId = carId) // ¡Pasar el carId a NuevoAlquilerScreen!
         }
-        composable(route = AppScreens.ResumenPago.route){
-            ResumenPagoScreen(navController)
+        // **CORRECCIÓN AQUÍ: `ResumenPago` ahora espera carId y totalPrice**
+        composable(
+            route = AppScreens.ResumenPago.route,
+            arguments = listOf(
+                navArgument("carId") { type = NavType.StringType },
+                navArgument("totalPrice") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val carId = backStackEntry.arguments?.getString("carId")
+            val totalPrice = backStackEntry.arguments?.getString("totalPrice")
+            ResumenPagoScreen(navController, carId = carId, totalPrice = totalPrice)
         }
         composable(route = AppScreens.Ajustes.route){
             ConfiguracionScreen(navController)

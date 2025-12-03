@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "790905010276",
+    "firebase_url": "https://carrent-18a35-default-rtdb.firebaseio.com",
+    "project_id": "carrent-18a35",
+    "storage_bucket": "carrent-18a35.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790905010276:android:5509b5c441480f1ce40771",
+        "android_client_info": {
+          "package_name": "com.example.carrentv1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQS8MO8qOOnSWYSkXGaY5j-1085psMG6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790905010276:android:afe989fc7c3b28f0e40771",
+        "android_client_info": {
+          "package_name": "com.example.tiptime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQS8MO8qOOnSWYSkXGaY5j-1085psMG6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

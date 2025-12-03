@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -34,7 +33,7 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F6FA)),
+            .background(MaterialTheme.colorScheme.background), // Adaptado a tema
         contentAlignment = Alignment.Center
     ) {
         Card(
@@ -43,7 +42,7 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                 .fillMaxWidth()
                 .fillMaxHeight(),
             shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), // Adaptado a tema
             elevation = CardDefaults.cardElevation(8.dp)
         ) {
             if (isLandscape) {
@@ -61,11 +60,11 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        IconButton(onClick = { /* Acción de regresar */ }, modifier = Modifier.align(Alignment.Start)) {
+                        IconButton(onClick = { navController.popBackStack() }, modifier = Modifier.align(Alignment.Start)) { // Acción de regresar y tint adaptable
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
                                 contentDescription = "Regresar",
-                                tint = Color.Black
+                                tint = MaterialTheme.colorScheme.onSurface
                             )
                         }
 
@@ -81,14 +80,14 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                             text = "Términos y Condiciones",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
-                            color = Color.Black,
+                            color = MaterialTheme.colorScheme.onSurface, // Adaptado a tema
                             textAlign = TextAlign.Center
                         )
 
                         Text(
                             text = "Car-Rent",
                             fontSize = 14.sp,
-                            color = Color.Gray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant // Adaptado a tema
                         )
                     }
 
@@ -108,7 +107,7 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                                 Aliquam erat volutpat. In vitae lectus sed urna facilisis fermentum.
                             """.trimIndent(),
                             fontSize = 15.sp,
-                            color = Color.DarkGray,
+                            color = MaterialTheme.colorScheme.onSurface, // Adaptado a tema
                             textAlign = TextAlign.Start,
                             lineHeight = 22.sp
                         )
@@ -122,8 +121,12 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
-                    IconButton(onClick = { /* Acción de regresar */ }, modifier = Modifier.align(Alignment.Start)) {
-
+                    IconButton(onClick = { navController.popBackStack() }, modifier = Modifier.align(Alignment.Start)) { // Acción de regresar y tint adaptable
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Regresar",
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(10.dp))
@@ -145,12 +148,12 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                                 text = "Términos y Condiciones",
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = Color.Black
+                                color = MaterialTheme.colorScheme.onSurface // Adaptado a tema
                             )
                             Text(
                                 text = "Car-Rent",
                                 fontSize = 14.sp,
-                                color = Color.Gray
+                                color = MaterialTheme.colorScheme.onSurfaceVariant // Adaptado a tema
                             )
                         }
                     }
@@ -166,7 +169,7 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                             Aliquam erat volutpat. In vitae lectus sed urna facilisis fermentum.
                         """.trimIndent(),
                         fontSize = 15.sp,
-                        color = Color.DarkGray,
+                        color = MaterialTheme.colorScheme.onSurface, // Adaptado a tema
                         textAlign = TextAlign.Start,
                         lineHeight = 22.sp
                     )

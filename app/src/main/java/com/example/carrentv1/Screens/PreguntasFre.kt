@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,131 +20,147 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PreguntasFrecuentesScreen(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Logo en la parte superior
-        Image(
-            painter = painterResource(id = com.example.carrentv1.R.drawable.car_rent),
-            contentDescription = "Car-Rent Logo",
-            modifier = Modifier
-                .size(120.dp)
-                .padding(top = 40.dp)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Título principal
-        Text(
-            text = "Preguntas Frecuentes",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF1565C0),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 24.dp)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Subtítulo
-        Text(
-            text = "Car-Rent",
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF333333),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 24.dp)
-        )
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        // Lista de preguntas
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Preguntas Frecuentes", color = MaterialTheme.colorScheme.onPrimary) },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver", tint = MaterialTheme.colorScheme.onPrimary)
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
+            )
+        },
+        containerColor = MaterialTheme.colorScheme.background
+    ) { paddingValues ->
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Pregunta 1
-            Text(
-                text = "¿Qué necesito para alquilar un coche?",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF333333),
-                modifier = Modifier.fillMaxWidth()
+            // Logo en la parte superior
+            Image(
+                painter = painterResource(id = com.example.carrentv1.R.drawable.car_rent),
+                contentDescription = "Car-Rent Logo",
+                modifier = Modifier
+                    .size(120.dp)
+                    .padding(top = 40.dp)
             )
 
-            // Pregunta 2
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Título principal
             Text(
-                text = "¿Qué incluye el precio del alquiler?",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF333333),
-                modifier = Modifier.fillMaxWidth()
+                text = "Preguntas Frecuentes",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 24.dp)
             )
 
-            // Pregunta 3
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Subtítulo
             Text(
-                text = "¿Puedo alquilar un coche sin tarjeta de crédito?",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF333333),
-                modifier = Modifier.fillMaxWidth()
+                text = "Car-Rent",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 24.dp)
             )
 
-            // Pregunta 4
-            Text(
-                text = "¿El seguro está incluido en el alquiler?",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF333333),
-                modifier = Modifier.fillMaxWidth()
-            )
+            Spacer(modifier = Modifier.height(32.dp))
 
-            // Pregunta 5
-            Text(
-                text = "¿Puedo devolver el coche en otra oficina diferente?",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF333333),
-                modifier = Modifier.fillMaxWidth()
-            )
+            // Lista de preguntas
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Pregunta 1
+                Text(
+                    text = "¿Qué necesito para alquilar un coche?",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-            // Pregunta 6
-            Text(
-                text = "¿Qué pasa si entrego el coche tarde?",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF333333),
-                modifier = Modifier.fillMaxWidth()
-            )
+                // Pregunta 2
+                Text(
+                    text = "¿Qué incluye el precio del alquiler?",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-            // Pregunta 7
-            Text(
-                text = "¿Puedo cancelar o modificar mi reserva?",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF333333),
-                modifier = Modifier.fillMaxWidth()
-            )
+                // Pregunta 3
+                Text(
+                    text = "¿Puedo alquilar un coche sin tarjeta de crédito?",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-            // Pregunta 8
-            Text(
-                text = "¿Qué documentos debo presentar al recoger el coche?",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF333333),
-                modifier = Modifier.fillMaxWidth()
-            )
+                // Pregunta 4
+                Text(
+                    text = "¿El seguro está incluido en el alquiler?",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Pregunta 5
+                Text(
+                    text = "¿Puedo devolver el coche en otra oficina diferente?",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Pregunta 6
+                Text(
+                    text = "¿Qué pasa si entrego el coche tarde?",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Pregunta 7
+                Text(
+                    text = "¿Puedo cancelar o modificar mi reserva?",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Pregunta 8
+                Text(
+                    text = "¿Qué documentos debo presentar al recoger el coche?",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            Spacer(modifier = Modifier.height(40.dp))
         }
-
-        Spacer(modifier = Modifier.height(40.dp))
     }
 }
-
