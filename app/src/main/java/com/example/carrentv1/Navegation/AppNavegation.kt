@@ -17,14 +17,14 @@ import com.example.carrentv1.Screens.RentCarForm
 import com.example.carrentv1.Screens.RestablecerContrasenaScreen
 import com.example.carrentv1.Screens.ResumenPagoScreen
 import com.example.carrentv1.Screens.SoporteTecnicoScreen
-import com.example.carrentv1.ui.screens.PantallaAutos
+import com.example.carrentv1.Screens.PantallaAutos // <<--- CORRECCIÓN AQUÍ
 import com.example.carrentv1.ui.screens.TerminosYCondicionesScreenResponsive
 import androidx.navigation.navArgument // Importar navArgument
 import androidx.navigation.NavType // Importar NavType
 import com.example.carrentv1.Screens.CarDetailScreen // Importación CORREGIDA
 
 import com.example.carrentv1.Navegation.AppScreens
-import com.example.carrentv1.RegistroScreen
+import com.example.carrentv1.Screens.RegistroScreen
 import com.example.carrentv1.Screens.PantallaLoginScreen
 
 

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -59,7 +60,7 @@ fun PantallaLoginScreen(navController: NavController) {
 
             // Título
             Text(
-                text = "Iniciar Sesión",
+                text = stringResource(id = R.string.Iniciar_Sesion),
                 fontSize = 24.sp,
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold
@@ -71,7 +72,7 @@ fun PantallaLoginScreen(navController: NavController) {
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Correo Electrónico") },
+                label = { Text(stringResource(id = R.string.Corrreo_Eelctronico)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
@@ -91,7 +92,7 @@ fun PantallaLoginScreen(navController: NavController) {
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Contraseña") },
+                label = { Text(stringResource(id = R.string.Contraseña)) },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth(),
@@ -137,7 +138,7 @@ fun PantallaLoginScreen(navController: NavController) {
                     .height(48.dp)
             ) {
                 Text(
-                    text = "Acceder",
+                    text = stringResource(id = R.string.Acceder),
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 16.sp
                 )
@@ -145,32 +146,11 @@ fun PantallaLoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(36.dp))
 
-            // Texto inferior
-            Text(
-                text = "Accede a través de tus cuentas personales",
-                color = MaterialTheme.colorScheme.onBackground,
-                fontSize = 12.sp,
-                textAlign = TextAlign.Center
-            )
+
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Iconos Facebook y Google (asumiendo que los logos son imágenes y no necesitan cambio de color directo, pero el fondo sí si lo tuvieran)
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(40.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.facebook_logo),
-                    contentDescription = "Facebook",
-                    modifier = Modifier.size(60.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.google_logo),
-                    contentDescription = "Google",
-                    modifier = Modifier.size(60.dp)
-                )
-            }
+
         }
     }
 }

@@ -13,12 +13,13 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    // Esto evita que Gradle acepte repositorios en build.gradle
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 
     repositories {
         google()
         mavenCentral()
+        // --- Repositorio PÚBLICO y CORRECTO para cardinalmobilesdk ---
+        maven { url = uri("https://cardinalcommerce.jfrog.io/artifactory/android") }
     }
 }
 

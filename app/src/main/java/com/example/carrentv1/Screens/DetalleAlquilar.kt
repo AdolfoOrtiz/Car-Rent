@@ -28,6 +28,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import androidx.compose.ui.graphics.SolidColor // <--- Añadir esta importación
+import androidx.compose.ui.res.stringResource
+import com.example.carrentv1.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +39,11 @@ fun  NuevoAlquilerScreen(navController: NavController, carId: String?) {
 
     var cantidad by remember { mutableStateOf("") }
     var unidad by remember { mutableStateOf("Hora(s)") }
-    val opciones = listOf("Hora(s)", "Día(s)", "Semana(s)")
+    val opciones = listOf(
+        stringResource(R.string.unidad_horas),
+        stringResource(R.string.unidad_dias),
+        stringResource(R.string.unidad_semanas)
+    )
 
     var carDetails by remember { mutableStateOf<CarDetails?>(null) }
     var isLoading by remember { mutableStateOf(true) }
@@ -81,12 +87,12 @@ fun  NuevoAlquilerScreen(navController: NavController, carId: String?) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Alquilar Auto", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimary) },
+                title = { Text( stringResource(R.string.alquilar_auto_titulo), fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimary) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Volver",
+                            contentDescription = stringResource(R.string.volver),
                             tint = MaterialTheme.colorScheme.onPrimary
                         )
                     }
@@ -111,17 +117,17 @@ fun  NuevoAlquilerScreen(navController: NavController, carId: String?) {
                 }
             } else if (errorMessage != null) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = errorMessage ?: "Ocurrió un error desconocido", color = MaterialTheme.colorScheme.error, fontSize = 18.sp, textAlign = TextAlign.Center)
+                    Text(text = errorMessage ?: "Error", color = MaterialTheme.colorScheme.error, fontSize = 18.sp, textAlign = TextAlign.Center)
                 }
             } else if (carDetails == null) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = "Auto no disponible para alquiler.", color = MaterialTheme.colorScheme.onBackground, fontSize = 18.sp, textAlign = TextAlign.Center)
+                    Text(text = "Error", color = MaterialTheme.colorScheme.onBackground, fontSize = 18.sp, textAlign = TextAlign.Center)
                 }
             } else {
                 val currentCar = carDetails!!
 
                 Text(
-                    text = "Nuevo Alquilamiento",
+                    text = stringResource(R.string.nuevo_alquilamiento_titulo),
                     fontSize = 22.sp,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
@@ -133,7 +139,7 @@ fun  NuevoAlquilerScreen(navController: NavController, carId: String?) {
                 // Información del auto (ahora dinámica)
                 Image(
                     painter = rememberAsyncImagePainter(currentCar.imageUrl),
-                    contentDescription = "Auto a Alquilar",
+                    contentDescription = stringResource(R.string.auto_a_alquilar),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(180.dp)
@@ -142,13 +148,13 @@ fun  NuevoAlquilerScreen(navController: NavController, carId: String?) {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text("${currentCar.marca} ${currentCar.modelo}", fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onBackground)
-                Text("Dueño: ${currentCar.duenio}", fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground)
-                Text("Precio: $${currentCar.precio} ${currentCar.tipoPrecio}", fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground)
+                Text("${stringResource(R.string.dueno)}: ${currentCar.duenio}", fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground)
+                Text("${stringResource(R.string.precio)}: $${currentCar.precio} ${currentCar.tipoPrecio}", fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
-                    text = "Cantidad a contratar:",
+                    text = stringResource(R.string.cantidad_contratar),
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.align(Alignment.Start)
@@ -245,7 +251,7 @@ fun  NuevoAlquilerScreen(navController: NavController, carId: String?) {
                         .height(50.dp)
                 ) {
                     Text(
-                        text = "Continuar con el pago",
+                        text = stringResource(R.string.continuar_pago),
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.onPrimary
                     )

@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -52,7 +53,7 @@ fun InicioScreen(navController: NavController) {
                     .width(200.dp)
                     .height(48.dp)
             ) {
-                Text(text = "Ingresar", color = MaterialTheme.colorScheme.onPrimary)
+                Text(text = stringResource(id = R.string.Ingresar), color = MaterialTheme.colorScheme.onPrimary)
             }
 
             // Botón "Registrarse"
@@ -64,7 +65,7 @@ fun InicioScreen(navController: NavController) {
                     .width(200.dp)
                     .height(48.dp)
             ) {
-                Text(text = "Registrarse", color = MaterialTheme.colorScheme.onPrimary)
+                Text(text = stringResource(id = R.string.Registrarse), color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }

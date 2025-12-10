@@ -50,6 +50,8 @@ dependencies {
 
     // Firebase Auth
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
 
     // Jetpack Compose
     implementation("androidx.compose.material3:material3:1.3.0")
@@ -60,21 +62,21 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material3) // esta linea estaba repetida
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.foundation.layout)
 
-    implementation(platform("com.google.firebase:firebase-bom:33.0.0")) // Asegúrate de tener el BOM
-    implementation("com.google.firebase:firebase-firestore-ktx")
-
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0")) // Usa la versión más reciente
-    implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("com.google.firebase:firebase-storage-ktx")
+    // Coil
     implementation("io.coil-kt:coil-compose:2.6.0")
-    implementation(libs.androidx.foundation) // O la versión más reciente que uses para Coil
 
-    // DataStore para preferencias de usuario (tema)
+    // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+    
+
+
+
+    implementation(libs.androidx.foundation) 
+    implementation(libs.androidx.ui)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

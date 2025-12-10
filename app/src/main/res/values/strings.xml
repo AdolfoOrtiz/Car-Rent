@@ -1,3 +1,269 @@
 <resources>
     <string name="app_name">CarRent v1</string>
+
+    <string name="Ingresar">Ingresar</string>
+    <string name="Registrarse">Registrarse</string>
+    <string name="Iniciar_Sesion">Iniciar Sesión</string>
+
+    <string name="Corrreo_Eelctronico">Correo Electrónico</string>
+    <string name="Contraseña">Contraseña</string>
+    <string name="Acceder">Acceder</string>
+    <string name="Registrate">Registrate</string>
+    <string name="Correo">Correo</string>
+
+    <string name="menu_add_car">Añadir Auto</string>
+    <string name="menu_support">Soporte</string>
+    <string name="menu_contact">Contacto</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_more_info">Más Información</string>
+    <string name="menu_logout">Cerrar Sesión</string>
+    <string name="share_option">Compartir</string>
+    <string name="settings_option">Ajustes</string>
+    <string name="dashboard_title">Car-Rent</string>
+    <string name="menu_content_description">Menú</string>
+    <string name="more_options_content_description">Más</string>
+    <string name="search_car_placeholder">Busca tu Auto Favorito</string>
+    <string name="cars_for_rent_title">Autos en Renta</string>
+    <string name="no_cars_available">No hay autos disponibles</string>
+    <string name="car_description_prefix">Auto</string>
+    <string name="location_na">N/A</string>
+    <string name="per_hour_price">por hora</string>
+
+    <!-- Pantalla de Contacto -->
+    <string name="contacto_titulo">Contacto</string>
+
+
+    <string name="app_nombre">Car-Rent</string>
+    <string name="contacto_subtitulo">Mantente en contacto con nosotros</string>
+
+    <!-- Teléfono -->
+    <string name="telefono_numero">4490000000</string>
+    <string name="telefono_contacto">Teléfono de contacto</string>
+
+    <!-- Correo -->
+    <string name="correo_empresa">padillaalonso786@gmail.com</string>
+
+    <!-- Redes sociales -->
+    <string name="seguir_redes">Síguenos en redes sociales</string>
+
+    <!-- Descripciones -->
+    <string name="logo_car_rent">Car-Rent Logo</string>
+    <string name="icono_facebook">Facebook</string>
+    <string name="icono_whatsapp">WhatsApp</string>
+    <string name="icono_gmail">Gmail</string>
+
+    <!-- Contacto Screen -->
+
+    <string name="contacto_volver">Volver</string>
+
+    <string name="contacto_app_nombre">Car-Rent</string>
+
+    <string name="contacto_telefono_num">4490000000</string>
+    <string name="contacto_telefono_texto">Teléfono de contacto</string>
+
+    <string name="contacto_correo">padillaalonso786@gmail.com</string>
+
+    <string name="contacto_redes_titulo">Síguenos en redes sociales</string>
+
+    <!-- Descripciones de imágenes -->
+    <string name="ic_logo_car_rent_desc">Logotipo Car-Rent</string>
+    <string name="ic_facebook_desc">Facebook</string>
+    <string name="ic_whatsapp_desc">WhatsApp</string>
+    <string name="ic_gmail_desc">Gmail</string>
+    <string name="alquilar_auto_titulo">Alquilar Auto</string>
+
+    <string name="detalle_del_auto">Detalle del Auto</string>
+    <string name="calificacion_desc">Calificación</string>
+
+
+    <string name="id_no_proporcionado">ID del auto no proporcionado para alquiler.</string>
+    <string name="auto_no_encontrado">Auto no encontrado para alquiler.</string>
+
+    <string name="auto_no_disponible">Auto no disponible para alquiler.</string>
+
+    <string name="nuevo_alquilamiento_titulo">Nuevo Alquilamiento</string>
+
+    <!-- Campos del formulario -->
+    <string name="cantidad_contratar">Cantidad a contratar:</string>
+    <string name="hora_s">Hora(s)</string>
+    <string name="dia_s">Día(s)</string>
+    <string name="semana_s">Semana(s)</string>
+
+    <!-- Botones -->
+    <string name="continuar_pago">Continuar con el pago</string>
+
+    <!-- Validaciones -->
+    <string name="cantidad_invalida">Por favor, ingrese una cantidad válida</string>
+    <string name="precio_invalido">El precio del auto no es válido</string>
+
+    <!-- Mensaje resumen -->
+    <string name="msg_confirmar_alquiler">Confirmar alquiler de %1$s %2$s. Total: $%3$s</string>
+
+    <!-- Títulos -->
+
+    <string name="nuevo_alquilamiento">Nuevo Alquilamiento</string>
+
+    <!-- Labels de UI -->
+
+
+    <!-- Textos dinámicos -->
+    <string name="dueno">Dueño</string>
+    <string name="precio">Precio</string>
+
+    <!-- Unidad -->
+    <string name="unidad_horas">Hora(s)</string>
+    <string name="unidad_dias">Día(s)</string>
+    <string name="unidad_semanas">Semana(s)</string>
+
+    <!-- Mensajes -->
+    <string name="volver">Volver</string>
+    <string name="auto_a_alquilar">Auto a alquilar</string>
+
+    <!-- Errores -->
+    <string name="error_id_no_enviado">ID del auto no proporcionado.</string>
+    <string name="error_auto_no_encontrado">Auto no encontrado.</string>
+    <string name="error_cargar_auto">Error al cargar el auto</string>
+    <string name="error_cantidad">Ingrese una cantidad válida</string>
+    <string name="error_precio">El precio del auto no es válido</string>
+
+    <!-- Confirmación -->
+    <string name="confirmar_alquiler">Confirmar alquiler. Total:</string>
+
+
+
+        <!-- ... otras cadenas existentes ... -->
+
+    <string name="no_detalles">No se pudieron cargar los detalles del auto.</string>
+    <string name="resumen_titulo">Resumen de Pago</string>
+    <string name="desc_auto">Imagen del auto</string>
+    <string name="precio_base">Precio base:</string>
+    <string name="ubicacion_label">Ubicación:</string>
+    <string name="total_pagar">Total a Pagar</string>
+    <string name="pago_exito">Pago realizado con éxito.</string>
+    <string name="error_procesar_pago">Error al procesar el pago</string>
+    <string name="paypal_pago">Pagar con PayPal</string>
+
+    <!-- TITULOS -->
+    <string name="mas_info_titulo">Más Información</string>
+    <string name="mas_info_titulo_main">MÁS INFORMACIÓN</string>
+
+    <string name="logo_desc">Car-Rent Logo</string>
+
+    <!-- TEXTOS -->
+    <string name="texto_1">Lorem ipsum dolor sit amet,</string>
+    <string name="texto_2">consectetur adipiscing elit.</string>
+    <string name="texto_3">Praesent vel tincidunt nisl.</string>
+    <string name="texto_4">Integer ut ligula id lacus</string>
+    <string name="texto_5">placerat luctus.</string>
+    <string name="texto_6">Nulla facilisis. Pellentesque</string>
+    <string name="texto_7">habitant morbi tristique</string>
+    <string name="texto_8">senectus et netus et</string>
+    <string name="texto_9">malesuada fames ac turpis</string>
+    <string name="texto_10">egestas.</string>
+    <string name="texto_11">Suspendisse potenti. Nam at</string>
+    <string name="texto_12">sapien non nulla placerat</string>
+    <string name="texto_13">convallis.</string>
+    <string name="texto_14">Aliquam erat volutpat. In</string>
+    <string name="texto_15">vitae lectus sed urna facilisis fermentum.</string>
+
+    <string name="perfil_titulo">Perfil de Usuario</string>
+    <string name="usuario_default">USUARIO</string>
+
+    <!-- Info de usuario -->
+    <string name="nombres_label">Nombres:</string>
+    <string name="correo_label">Correo:</string>
+    <string name="telefono_label">Teléfono:</string>
+    <string name="no_disponible">N/A</string>
+    <string name="pf_titulo">Preguntas Frecuentes</string>
+    <string name="pf_subtitulo">Car-Rent</string>
+    <string name="pf_volver">Volver</string>
+    <string name="pf_logo_desc">Logo de Car-Rent</string>
+
+    <string name="pf_p1">¿Qué necesito para alquilar un coche?</string>
+    <string name="pf_p2">¿Qué incluye el precio del alquiler?</string>
+    <string name="pf_p3">¿Puedo alquilar un coche sin tarjeta de crédito?</string>
+    <string name="pf_p4">¿El seguro está incluido en el alquiler?</string>
+    <string name="pf_p5">¿Puedo devolver el coche en otra oficina diferente?</string>
+    <string name="pf_p6">¿Qué pasa si entrego el coche tarde?</string>
+    <string name="pf_p7">¿Puedo cancelar o modificar mi reserva?</string>
+    <string name="pf_p8">¿Qué documentos debo presentar al recoger el coche?</string>
+
+
+
+    <!-- Restablecer contraseña -->
+    <string name="restablecer_subtitulo">Restablece tu contraseña</string>
+    <string name="restablecer_instruccion">Confirma tu correo electrónico</string>
+
+    <string name="restablecer_email">E-Mail</string>
+    <string name="restablecer_nueva_contra">Nueva Contraseña</string>
+    <string name="restablecer_confirmar_contra">Confirmar Contraseña</string>
+
+    <string name="restablecer_boton">Restablecer contraseña</string>
+
+    <string name="renta_tu_vehiculo">Renta tu
+Vehículo</string>
+    <string name="ingresa_datos_vehiculo">Ingresa los datos del vehículo</string>
+    <string name="marca">Marca</string>
+    <string name="modelo">Modelo</string>
+    <string name="aire_acondicionado">Aire Acondicionado</string>
+    <string name="anio">Año</string>
+    <string name="puertas">Puertas</string>
+
+    <string name="tipo_precio">Tipo de Precio</string>
+
+    <string name="especificaciones_tecnicas">Especificaciones técnicas</string>
+    <string name="color">Color</string>
+    <string name="kilometraje">Kilometraje</string>
+    <string name="version">Versión</string>
+    <string name="transmision">Transmisión</string>
+
+    <string name="url_imagen">URL de la Imagen del Vehículo</string>
+    <string name="pegar_url_imagen">Pegar URL de la Imagen</string>
+    <string name="imagen_vehiculo">Imagen del vehículo</string>
+    <string name="no_hay_imagen">No hay imagen o URL inválida</string>
+
+    <string name="guardar_vehiculo">Guardar Vehículo</string>
+    <string name="vehiculo_guardado">Vehículo guardado correctamente</string>
+    <string name="error_guardar">Error al guardar el vehículo</string>
+    <string name="faltan_campos">Completa todos los campos obligatorios</string>
+
+    <string name="soporte_tecnico">Soporte Técnico</string>
+    <string name="herramientas_soporte">Herramientas de soporte</string>
+
+    <string name="restablecer_contrasena">Restablecer Contraseña</string>
+    <string name="preguntas_frecuentes">Preguntas frecuentes</string>
+    <string name="reportar_problema">Reportar un problema</string>
+
+    <string name="img_soporte">Soporte Técnico</string>
+    <string name="language_english">Ingles</string>
+    <string name="change_language">Cambiar Idioma</string>
+    <string name="theme_white">Tema Blanco</string>
+    <string name="theme_dark">Tema Obscuro</string>
+    <string name="change_theme">Cambiar Tema</string>
+    <string name="language_spanish">Español</string>
+    <string name="settings_title">Ajustes</string>
+
+    <string name="terminos_titulo">Términos y Condiciones</string>
+    <string name="app_name_short">Car-Rent</string>
+
+    <string name="register_terms_pre_text">Al registrarme, acepto los</string>
+    <string name="terms_and_conditions_button">Términos y Condiciones</string>
+    <string name="terms_and_conditions_content_description">Ir a Términos y Condiciones</string>
+    <string name="already_have_account">¿Ya tienes una cuenta?</string>
+    <string name="terminos_lorem">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Praesent vel tincidunt nisl. Integer ut ligula id lacus placerat luctus.
+        Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+        Suspendisse potenti. Nam at sapien non nulla placerat convallis.
+        Aliquam erat volutpat. In vitae lectus sed urna facilisis fermentum.
+    </string>
+
+    <!-- Textos para compartir -->
+    <string name="share_title">Compartir vía...</string>
+    <string name="share_text">¡Descubre Car-Rent! La mejor app para alquilar autos.</string>
+    
+    <!-- Textos de PayPal -->
+    <string name="pago_cancelado">El pago fue cancelado.</string>
+    <string name="pago_error">Ocurrió un error en el pago.</string>
+
 </resources>

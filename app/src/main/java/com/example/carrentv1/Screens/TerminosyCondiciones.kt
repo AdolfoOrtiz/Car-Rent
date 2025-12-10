@@ -12,9 +12,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -22,18 +22,16 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.carrentv1.R
 
-
 @Composable
 fun TerminosYCondicionesScreenResponsive(navController: NavController) {
     val configuration = LocalConfiguration.current
     val orientation = configuration.orientation
-
     val isLandscape = orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background), // Adaptado a tema
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Card(
@@ -42,17 +40,16 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                 .fillMaxWidth()
                 .fillMaxHeight(),
             shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), // Adaptado a tema
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             elevation = CardDefaults.cardElevation(8.dp)
         ) {
             if (isLandscape) {
-                // 🌄 Diseño en horizontal
+
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp)
                 ) {
-                    // Columna izquierda: logo y título
                     Column(
                         modifier = Modifier
                             .weight(1f)
@@ -60,38 +57,41 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        IconButton(onClick = { navController.popBackStack() }, modifier = Modifier.align(Alignment.Start)) { // Acción de regresar y tint adaptable
+
+                        IconButton(
+                            onClick = { navController.popBackStack() },
+                            modifier = Modifier.align(Alignment.Start)
+                        ) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
-                                contentDescription = "Regresar",
+                                contentDescription = stringResource(id = R.string.volver),
                                 tint = MaterialTheme.colorScheme.onSurface
                             )
                         }
 
                         Image(
                             painter = painterResource(id = R.drawable.car_rent),
-                            contentDescription = "Logo",
+                            contentDescription = stringResource(id = R.string.app_name_short),
                             modifier = Modifier
                                 .size(100.dp)
                                 .padding(8.dp)
                         )
 
                         Text(
-                            text = "Términos y Condiciones",
+                            text = stringResource(id = R.string.terminos_titulo),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurface, // Adaptado a tema
+                            color = MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Center
                         )
 
                         Text(
-                            text = "Car-Rent",
+                            text = stringResource(id = R.string.app_name_short),
                             fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant // Adaptado a tema
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
 
-                    // Columna derecha: texto
                     Column(
                         modifier = Modifier
                             .weight(2f)
@@ -99,32 +99,27 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                             .padding(8.dp)
                     ) {
                         Text(
-                            text = """
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                Praesent vel tincidunt nisl. Integer ut ligula id lacus placerat luctus. 
-                                Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                                Suspendisse potenti. Nam at sapien non nulla placerat convallis. 
-                                Aliquam erat volutpat. In vitae lectus sed urna facilisis fermentum.
-                            """.trimIndent(),
+                            text = stringResource(id = R.string.terminos_lorem),
                             fontSize = 15.sp,
-                            color = MaterialTheme.colorScheme.onSurface, // Adaptado a tema
+                            color = MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Start,
                             lineHeight = 22.sp
                         )
                     }
                 }
+
             } else {
-                // 📱 Diseño en vertical
+
                 Column(
                     modifier = Modifier
                         .padding(16.dp)
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
-                    IconButton(onClick = { navController.popBackStack() }, modifier = Modifier.align(Alignment.Start)) { // Acción de regresar y tint adaptable
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Regresar",
+                            contentDescription = stringResource(id = R.string.volver),
                             tint = MaterialTheme.colorScheme.onBackground
                         )
                     }
@@ -137,7 +132,7 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.car_rent),
-                            contentDescription = "Logo",
+                            contentDescription = stringResource(id = R.string.app_name_short),
                             modifier = Modifier
                                 .size(60.dp)
                                 .padding(end = 8.dp)
@@ -145,15 +140,15 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
 
                         Column {
                             Text(
-                                text = "Términos y Condiciones",
+                                text = stringResource(id = R.string.terminos_titulo),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSurface // Adaptado a tema
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
-                                text = "Car-Rent",
+                                text = stringResource(id = R.string.app_name_short),
                                 fontSize = 14.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant // Adaptado a tema
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                     }
@@ -161,15 +156,9 @@ fun TerminosYCondicionesScreenResponsive(navController: NavController) {
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = """
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Praesent vel tincidunt nisl. Integer ut ligula id lacus placerat luctus. 
-                            Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                            Suspendisse potenti. Nam at sapien non nulla placerat convallis. 
-                            Aliquam erat volutpat. In vitae lectus sed urna facilisis fermentum.
-                        """.trimIndent(),
+                        text = stringResource(id = R.string.terminos_lorem),
                         fontSize = 15.sp,
-                        color = MaterialTheme.colorScheme.onSurface, // Adaptado a tema
+                        color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Start,
                         lineHeight = 22.sp
                     )

@@ -1,5 +1,7 @@
 package com.example.carrentv1
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,49 +14,88 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.carrentv1.Navegation.AppScreens
 import com.example.carrentv1.Screens.*
-import com.example.carrentv1.ui.screens.PantallaAutos
+import com.example.carrentv1.Screens.PantallaAutos // <-- CORRECCIÓN AQUÍ
 import com.example.carrentv1.ui.screens.TerminosYCondicionesScreenResponsive
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.delay
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
-
-import com.example.carrentv1.ui.theme.CarRentV1Theme // Importar el tema
-import com.example.carrentv1.data.ThemePreference // Importar ThemePreference
-import androidx.compose.runtime.collectAsState // Importar collectAsState
-import androidx.compose.runtime.getValue // Importar getValue
-import androidx.compose.ui.platform.LocalContext // Importar LocalContext
-import androidx.compose.runtime.remember // <--- Añadir esta línea
+import java.util.Locale
+import android.content.res.Configuration
+import com.example.carrentv1.ui.theme.CarRentV1Theme
+import com.example.carrentv1.data.ThemePreference
+import com.example.carrentv1.data.LanguagePreference
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.remember
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalAnimationApi::class) // <-- ANOTACIÓN AÑADIDA
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val context = LocalContext.current // Obtener el contexto
-            val themePreference = remember { ThemePreference(context) } // Crear instancia de ThemePreference
-            val darkTheme by themePreference.themePreference.collectAsState(initial = false) // Leer la preferencia del tema
+            val context = LocalContext.current
+            val themePreference = remember { ThemePreference(context) }
+            val darkTheme by themePreference.themePreference.collectAsState(initial = false)
 
-            CarRentV1Theme(darkTheme = darkTheme) { // Envolver con tu tema
-                AppNavigation()
+            val languagePreference = remember { LanguagePreference(context) }
+            val selectedLanguage by languagePreference.languagePreference.collectAsState(initial = LanguagePreference.DEFAULT_LANGUAGE)
+
+            // --- Lógica para el idioma ---
+            LaunchedEffect(selectedLanguage) {
+                val newLocale = Locale(selectedLanguage)
+                Locale.setDefault(newLocale)
+                val configuration = Configuration(context.resources.configuration)
+                configuration.setLocale(newLocale)
+                context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
+            }
+
+            // --- Lógica para la orientación ---
+            val navController = rememberAnimatedNavController()
+            LockScreenOrientation(navController)
+
+            CarRentV1Theme(darkTheme = darkTheme) {
+                AppNavigation(navController) // Pasar el navController
             }
         }
     }
 }
 
+@Composable
+fun LockScreenOrientation(navController: NavHostController) {
+    val context = LocalContext.current
+    val activity = context as? Activity ?: return // Obtener la actividad
+
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
+
+    LaunchedEffect(currentRoute) {
+        val canRotate = currentRoute?.startsWith(AppScreens.Terminos.route) == true ||
+                        currentRoute?.startsWith(AppScreens.detalleAuto.route.substringBefore("/")) == true // Comprobar la base de la ruta
+
+        activity.requestedOrientation = if (canRotate) {
+            ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
+    }
+}
+
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
+fun AppNavigation(navController: NavHostController) { // Aceptar el NavController
 
     AnimatedNavHost(
         navController = navController,
@@ -62,12 +103,10 @@ fun AppNavigation() {
         enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) + fadeIn() },
         exitTransition = { slideOutHorizontally(targetOffsetX = { -1000 }) + fadeOut() }
     ) {
-        // Pantalla Splash
         composable("splash") {
             SplashScreen(navController)
         }
-        
-        // Todas tus pantallas (corregidas según AppNavegation.kt)
+
         composable(route = AppScreens.Inicio.route){
             InicioScreen(navController)
         }
@@ -138,9 +177,9 @@ fun AppNavigation() {
 @Composable
 fun SplashScreen(navController: NavHostController) {
     LaunchedEffect(Unit) {
-        delay(3000) // Espera 3 segundos
+        delay(3000) 
         navController.navigate(AppScreens.Inicio.route) {
-            popUpTo("splash") { inclusive = true } // Elimina el splash del historial
+            popUpTo("splash") { inclusive = true } 
         }
     }
     Box(

@@ -10,19 +10,19 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.carrentv1.R
 
 @Composable
 fun RestablecerContrasenaScreen(navController: NavController) {
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
@@ -35,18 +35,18 @@ fun RestablecerContrasenaScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        // Logo en la parte superior
+
         Image(
-            painter = painterResource(id = com.example.carrentv1.R.drawable.car_rent),
+            painter = painterResource(id = R.drawable.car_rent),
             contentDescription = "Car-Rent Logo",
             modifier = Modifier.size(120.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Título principal
+        // Título
         Text(
-            text = "Car-Rent",
+            text = stringResource(id = R.string.app_name),
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
@@ -57,7 +57,7 @@ fun RestablecerContrasenaScreen(navController: NavController) {
 
         // Subtítulo
         Text(
-            text = "Restablece tu contraseña",
+            text = stringResource(id = R.string.restablecer_subtitulo),
             fontSize = 18.sp,
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center,
@@ -68,99 +68,70 @@ fun RestablecerContrasenaScreen(navController: NavController) {
 
         // Instrucción
         Text(
-            text = "Confirma tu correo electrónico",
+            text = stringResource(id = R.string.restablecer_instruccion),
             fontSize = 16.sp,
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.fillMaxWidth()
         )
 
-        // Campo de correo electrónico
+        // Email
         OutlinedTextField(
             value = email,
-            onValueChange = { email = it }, // Corregido 'onValuechange' a 'onValueChange'
-            label = { Text("E-Mail") },
+            onValueChange = { email = it },
+            label = { Text(stringResource(id = R.string.restablecer_email)) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Email,
-                    contentDescription = "Email",
+                    contentDescription = stringResource(id = R.string.restablecer_email),
                     tint = MaterialTheme.colorScheme.primary
                 )
             },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                cursorColor = MaterialTheme.colorScheme.primary,
-                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-            )
+            shape = RoundedCornerShape(12.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Campo de nueva contraseña
+        // Nueva contraseña
         OutlinedTextField(
             value = password,
-            onValueChange = { password = it }, // Corregido 'onValuechange' a 'onValueChange'
-            label = { Text("Nueva Contraseña") },
+            onValueChange = { password = it },
+            label = { Text(stringResource(id = R.string.restablecer_nueva_contra)) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                cursorColor = MaterialTheme.colorScheme.primary,
-                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-            )
+            shape = RoundedCornerShape(12.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Campo de confirmar contraseña
+        // Confirmar contraseña
         OutlinedTextField(
             value = confirmPassword,
-            onValueChange = { confirmPassword = it }, // Corregido 'onValuechange' a 'onValueChange'
-            label = { Text("Confirmar Contraseña") },
+            onValueChange = { confirmPassword = it },
+            label = { Text(stringResource(id = R.string.restablecer_confirmar_contra)) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                cursorColor = MaterialTheme.colorScheme.primary,
-                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-            )
+            shape = RoundedCornerShape(12.dp)
         )
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Botón de restablecer contraseña
+        // Botón
         Button(
-            onClick = { /* Acción para restablecer contraseña */ },
+            onClick = { /* Acción */ },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
-            shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            shape = RoundedCornerShape(16.dp)
         ) {
             Text(
-                text = "Restablecer contraseña",
+                text = stringResource(id = R.string.restablecer_boton),
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimary
+                fontWeight = FontWeight.Bold
             )
         }
     }

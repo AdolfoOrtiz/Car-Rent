@@ -1,12 +1,8 @@
 package com.example.carrentv1.Screens
 
-import android.net.Uri
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,24 +12,24 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import com.example.carrentv1.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RentCarForm(navController: NavController) {
-    // Estados de los campos
+
     var marca by remember { mutableStateOf(TextFieldValue("")) }
     var modelo by remember { mutableStateOf(TextFieldValue("")) }
     var aireAcondicionado by remember { mutableStateOf(false) }
@@ -52,9 +48,7 @@ fun RentCarForm(navController: NavController) {
     val context = LocalContext.current
     val db = Firebase.firestore
 
-    Scaffold(
-        containerColor = MaterialTheme.colorScheme.background // Adaptado a tema
-    ) { padding ->
+    Scaffold(containerColor = MaterialTheme.colorScheme.background) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -63,33 +57,33 @@ fun RentCarForm(navController: NavController) {
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             Text(
-                text = "Renta tu\nVehículo",
+                text = stringResource(R.string.renta_tu_vehiculo),
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary, // Adaptado a tema
+                color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Card para Datos del Vehículo
+            // CARD 1 – DATOS DEL VEHÍCULO
             Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                 shape = RoundedCornerShape(8.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface) // Adaptado a tema
+                colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+
                     Text(
-                        text = "Ingresa los datos del vehículo",
+                        text = stringResource(R.string.ingresa_datos_vehiculo),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurface // Adaptado a tema
+                        color = MaterialTheme.colorScheme.onSurface
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))
@@ -97,145 +91,74 @@ fun RentCarForm(navController: NavController) {
                     OutlinedTextField(
                         value = marca,
                         onValueChange = { marca = it },
-                        label = { Text("Marca") },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                            focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                            focusedLabelColor = MaterialTheme.colorScheme.primary,
-                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                            cursorColor = MaterialTheme.colorScheme.primary,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                        )
+                        label = { Text(stringResource(R.string.marca)) },
+                        modifier = Modifier.fillMaxWidth()
                     )
 
                     OutlinedTextField(
                         value = modelo,
                         onValueChange = { modelo = it },
-                        label = { Text("Modelo") },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                            focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                            focusedLabelColor = MaterialTheme.colorScheme.primary,
-                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                            cursorColor = MaterialTheme.colorScheme.primary,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                        )
+                        label = { Text(stringResource(R.string.modelo)) },
+                        modifier = Modifier.fillMaxWidth()
                     )
 
                     Row(
+                        modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start,
-                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Aire Acondicionado", color = MaterialTheme.colorScheme.onSurface)
+                        Text(stringResource(R.string.aire_acondicionado))
                         Checkbox(
                             checked = aireAcondicionado,
-                            onCheckedChange = { aireAcondicionado = it },
-                            colors = CheckboxDefaults.colors(checkedColor = MaterialTheme.colorScheme.primary)
+                            onCheckedChange = { aireAcondicionado = it }
                         )
                     }
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
                         OutlinedTextField(
                             value = anio,
                             onValueChange = { anio = it },
-                            label = { Text("Año") },
-                            modifier = Modifier.weight(1f),
-                            colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                                cursorColor = MaterialTheme.colorScheme.primary,
-                                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                            )
+                            label = { Text(stringResource(R.string.anio)) },
+                            modifier = Modifier.weight(1f)
                         )
-
                         Spacer(modifier = Modifier.width(8.dp))
-
                         OutlinedTextField(
                             value = puertas,
                             onValueChange = { puertas = it },
-                            label = { Text("Puertas") },
-                            modifier = Modifier.weight(1f),
-                            colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                                cursorColor = MaterialTheme.colorScheme.primary,
-                                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                            )
+                            label = { Text(stringResource(R.string.puertas)) },
+                            modifier = Modifier.weight(1f)
                         )
                     }
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
                         OutlinedTextField(
                             value = precio,
                             onValueChange = { precio = it },
-                            label = { Text("Precio") },
-                            modifier = Modifier.weight(2f),
-                            colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                                cursorColor = MaterialTheme.colorScheme.primary,
-                                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                            )
+                            label = { Text(stringResource(R.string.precio)) },
+                            modifier = Modifier.weight(2f)
                         )
-
                         Spacer(modifier = Modifier.width(8.dp))
-
                         OutlinedTextField(
                             value = tipoPrecio,
                             onValueChange = { tipoPrecio = it },
-                            label = { Text("Tipo de Precio") },
-                            modifier = Modifier.weight(1f),
-                            colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                                cursorColor = MaterialTheme.colorScheme.primary,
-                                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                            )
+                            label = { Text(stringResource(R.string.tipo_precio)) },
+                            modifier = Modifier.weight(1f)
                         )
                     }
                 }
             }
 
-            // Card para Especificaciones Técnicas
+            // CARD 2 – ESPECIFICACIONES TÉCNICAS
             Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface) // Adaptado a tema
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                shape = RoundedCornerShape(8.dp)
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.padding(16.dp)
                 ) {
                     Text(
-                        text = "Especificaciones técnicas",
+                        text = stringResource(R.string.especificaciones_tecnicas),
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurface // Adaptado a tema
+                        fontWeight = FontWeight.Medium
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))
@@ -243,128 +166,73 @@ fun RentCarForm(navController: NavController) {
                     OutlinedTextField(
                         value = color,
                         onValueChange = { color = it },
-                        label = { Text("Color") },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                            focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                            focusedLabelColor = MaterialTheme.colorScheme.primary,
-                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                            cursorColor = MaterialTheme.colorScheme.primary,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                        )
+                        label = { Text(stringResource(R.string.color)) },
+                        modifier = Modifier.fillMaxWidth()
                     )
 
                     OutlinedTextField(
                         value = kilometraje,
                         onValueChange = { kilometraje = it },
-                        label = { Text("Kilometraje") },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                            focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                            focusedLabelColor = MaterialTheme.colorScheme.primary,
-                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                            cursorColor = MaterialTheme.colorScheme.primary,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                        )
+                        label = { Text(stringResource(R.string.kilometraje)) },
+                        modifier = Modifier.fillMaxWidth()
                     )
 
                     OutlinedTextField(
                         value = version,
                         onValueChange = { version = it },
-                        label = { Text("Versión") },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                            focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                            focusedLabelColor = MaterialTheme.colorScheme.primary,
-                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                            cursorColor = MaterialTheme.colorScheme.primary,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                        )
+                        label = { Text(stringResource(R.string.version)) },
+                        modifier = Modifier.fillMaxWidth()
                     )
 
                     OutlinedTextField(
                         value = transmision,
                         onValueChange = { transmision = it },
-                        label = { Text("Transmisión") },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                            focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                            focusedLabelColor = MaterialTheme.colorScheme.primary,
-                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                            cursorColor = MaterialTheme.colorScheme.primary,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                        )
+                        label = { Text(stringResource(R.string.transmision)) },
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
 
-            // Card para URL de Imagen
+            // CARD 3 – URL IMAGEN
             Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface) // Adaptado a tema
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                shape = RoundedCornerShape(8.dp)
             ) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.padding(16.dp)
                 ) {
                     Text(
-                        text = "URL de la Imagen del Vehículo",
+                        text = stringResource(R.string.url_imagen),
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurface, // Adaptado a tema
-                        modifier = Modifier.padding(bottom = 8.dp)
+                        fontWeight = FontWeight.Medium
                     )
 
                     OutlinedTextField(
                         value = imageUrlInput,
                         onValueChange = { imageUrlInput = it },
-                        label = { Text("Pegar URL de la Imagen") },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors( // Usar colores del tema
-                            focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                            focusedLabelColor = MaterialTheme.colorScheme.primary,
-                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                            cursorColor = MaterialTheme.colorScheme.primary,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                        )
+                        label = { Text(stringResource(R.string.pegar_url_imagen)) },
+                        modifier = Modifier.fillMaxWidth()
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Previsualización de la imagen desde la URL
                     if (imageUrlInput.text.isNotEmpty()) {
                         Image(
                             painter = rememberImagePainter(imageUrlInput.text),
-                            contentDescription = "Imagen del vehículo",
+                            contentDescription = stringResource(R.string.imagen_vehiculo),
                             modifier = Modifier
                                 .size(200.dp)
                                 .clip(RoundedCornerShape(8.dp)),
                             contentScale = ContentScale.Crop
                         )
                     } else {
-                        // Placeholder si no hay URL o es inválida
                         Box(
                             modifier = Modifier
                                 .size(200.dp)
-                                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(8.dp)), // Adaptado a tema
+                                .background(MaterialTheme.colorScheme.surfaceVariant),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text("No hay imagen o URL inválida", color = MaterialTheme.colorScheme.onSurfaceVariant) // Adaptado a tema
+                            Text(stringResource(R.string.no_hay_imagen))
                         }
                     }
                 }
@@ -372,12 +240,13 @@ fun RentCarForm(navController: NavController) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Botón para Guardar en Firestore
+            // BOTÓN GUARDAR
             Button(
                 onClick = {
                     if (marca.text.isNotEmpty() && modelo.text.isNotEmpty() &&
                         anio.isNotEmpty() && puertas.isNotEmpty() && precio.text.isNotEmpty() &&
-                        imageUrlInput.text.isNotEmpty()) {
+                        imageUrlInput.text.isNotEmpty()
+                    ) {
 
                         val carData = hashMapOf(
                             "marca" to marca.text,
@@ -396,24 +265,22 @@ fun RentCarForm(navController: NavController) {
 
                         db.collection("coches")
                             .add(carData)
-                            .addOnSuccessListener { documentReference ->
-                                Toast.makeText(context, "Vehículo guardado con ID: ${documentReference.id}", Toast.LENGTH_LONG).show()
+                            .addOnSuccessListener {
+                                Toast.makeText(context, R.string.vehiculo_guardado, Toast.LENGTH_LONG).show()
                                 navController.popBackStack()
                             }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(context, "Error al guardar vehículo: ${e.message}", Toast.LENGTH_LONG).show()
+                            .addOnFailureListener {
+                                Toast.makeText(context, R.string.error_guardar, Toast.LENGTH_LONG).show()
                             }
+
                     } else {
-                        Toast.makeText(context, "Por favor, completa todos los campos obligatorios y pega la URL de una imagen.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, R.string.faltan_campos, Toast.LENGTH_LONG).show()
                     }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary), // Adaptado a tema
-                shape = RoundedCornerShape(8.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
+                modifier = Modifier.fillMaxWidth().height(50.dp),
+                shape = RoundedCornerShape(8.dp)
             ) {
-                Text(text = "Guardar Vehículo", color = MaterialTheme.colorScheme.onPrimary, fontSize = 18.sp) // Adaptado a tema
+                Text(stringResource(R.string.guardar_vehiculo))
             }
         }
     }

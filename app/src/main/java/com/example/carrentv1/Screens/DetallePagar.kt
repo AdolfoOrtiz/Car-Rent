@@ -13,16 +13,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.carrentv1.Navegation.AppScreens // Importar AppScreens
+import com.example.carrentv1.Navegation.AppScreens
+import com.example.carrentv1.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch // Importar launch para coroutines
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,7 +32,7 @@ import kotlinx.coroutines.tasks.await
 fun ResumenPagoScreen(navController: NavController, carId: String?, totalPrice: String?) {
     val context = LocalContext.current
     val db = Firebase.firestore
-    val scope = rememberCoroutineScope() // Crear un scope para coroutines
+    val scope = rememberCoroutineScope()
 
     var carDetails by remember { mutableStateOf<CarDetails?>(null) }
     var isLoading by remember { mutableStateOf(true) }
@@ -38,7 +40,7 @@ fun ResumenPagoScreen(navController: NavController, carId: String?, totalPrice: 
 
     LaunchedEffect(carId) {
         if (carId == null) {
-            errorMessage = "ID del auto no proporcionado."
+            errorMessage = ""
             isLoading = false
             return@LaunchedEffect
         }
@@ -46,25 +48,25 @@ fun ResumenPagoScreen(navController: NavController, carId: String?, totalPrice: 
         isLoading = true
         errorMessage = null
         try {
-            val documentSnapshot = db.collection("coches").document(carId).get().await()
-            if (documentSnapshot.exists()) {
+            val snapshot = db.collection("coches").document(carId).get().await()
+            if (snapshot.exists()) {
                 carDetails = CarDetails(
-                    id = documentSnapshot.id,
-                    imageUrl = documentSnapshot.getString("imageUrl") ?: "",
-                    marca = documentSnapshot.getString("marca") ?: "",
-                    modelo = documentSnapshot.getString("modelo") ?: "",
-                    ubicacion = documentSnapshot.getString("ubicacion") ?: "",
-                    precio = documentSnapshot.getString("precio") ?: "",
-                    tipoPrecio = documentSnapshot.getString("tipoPrecio") ?: "por hora",
-                    calif = documentSnapshot.getDouble("calif") ?: 0.0,
-                    duenio = documentSnapshot.getString("duenio") ?: "N/A",
-                    telefono = documentSnapshot.getString("telefono") ?: "N/A"
+                    id = snapshot.id,
+                    imageUrl = snapshot.getString("imageUrl") ?: "",
+                    marca = snapshot.getString("marca") ?: "",
+                    modelo = snapshot.getString("modelo") ?: "",
+                    ubicacion = snapshot.getString("ubicacion") ?: "",
+                    precio = snapshot.getString("precio") ?: "",
+                    tipoPrecio = snapshot.getString("tipoPrecio") ?: "",
+                    calif = snapshot.getDouble("calif") ?: 0.0,
+                    duenio = snapshot.getString("duenio") ?: "",
+                    telefono = snapshot.getString("telefono") ?: ""
                 )
             } else {
-                errorMessage = "Auto no encontrado."
+                errorMessage = ""
             }
         } catch (e: Exception) {
-            errorMessage = "Error al cargar el auto: ${e.message}"
+            errorMessage =""
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
         } finally {
             isLoading = false
@@ -80,55 +82,51 @@ fun ResumenPagoScreen(navController: NavController, carId: String?, totalPrice: 
     ) {
         if (isLoading) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                CircularProgressIndicator()
             }
         } else if (errorMessage != null || carDetails == null) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = errorMessage ?: "No se pudieron cargar los detalles.",
+                    text = errorMessage ?: stringResource(R.string.no_detalles),
                     color = MaterialTheme.colorScheme.error,
                     textAlign = TextAlign.Center
                 )
             }
         } else {
             val currentCar = carDetails!!
-            // Título
+
             Text(
-                text = "Resumen",
+                text = stringResource(R.string.resumen_titulo),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Información del vehículo
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(4.dp)
+                shape = RoundedCornerShape(12.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                     Image(
+                    Image(
                         painter = rememberAsyncImagePainter(currentCar.imageUrl),
-                        contentDescription = "Imagen del Auto",
+                        contentDescription = stringResource(R.string.desc_auto),
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp)),
                         contentScale = ContentScale.Crop
                     )
+
                     Text(
                         text = "${currentCar.marca} ${currentCar.modelo}",
                         fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        fontWeight = FontWeight.Bold
                     )
 
                     Row(
@@ -136,103 +134,89 @@ fun ResumenPagoScreen(navController: NavController, carId: String?, totalPrice: 
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Precio base:",
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            text = stringResource(R.string.precio_base),
+                            fontSize = 16.sp
                         )
                         Text(
                             text = "$${currentCar.precio} ${currentCar.tipoPrecio}",
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurface
+                            fontWeight = FontWeight.Medium
                         )
                     }
                 }
             }
 
-            // Ubicación
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(4.dp)
+                shape = RoundedCornerShape(12.dp)
             ) {
-                Column(
-                    modifier = Modifier.padding(16.dp)
-                ) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Ubicación:",
-                        fontSize = 16.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.fillMaxWidth()
+                        text = stringResource(R.string.ubicacion_label),
+                        fontSize = 16.sp
                     )
                     Text(
                         text = currentCar.ubicacion,
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.fillMaxWidth()
+                        fontWeight = FontWeight.Medium
                     )
                 }
             }
 
-            // Total a pagar
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
-                elevation = CardDefaults.cardElevation(4.dp)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Total a pagar:",
-                        fontSize = 18.sp,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                        text = stringResource(R.string.total_pagar),
+                        fontSize = 18.sp
                     )
                     Text(
                         text = "$${totalPrice ?: "0.00"}",
                         fontSize = 32.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Botón de PayPal
             Button(
-                onClick = { 
+                onClick = {
                     if (carId != null) {
                         scope.launch {
                             try {
                                 db.collection("coches").document(carId).delete().await()
-                                Toast.makeText(context, "¡Pago exitoso y auto eliminado de la base de datos!", Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    context,
+                                    "",
+                                    Toast.LENGTH_LONG
+                                ).show()
                                 navController.navigate(AppScreens.dashboard.route) {
                                     popUpTo(AppScreens.dashboard.route) { inclusive = true }
                                 }
                             } catch (e: Exception) {
-                                Toast.makeText(context, "Error al procesar el pago o eliminar el auto: ${e.message}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    context,
+                                    "",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         }
-                    } else {
-                        Toast.makeText(context, "Error: ID del auto no disponible para procesar el pago.", Toast.LENGTH_LONG).show()
                     }
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                modifier = Modifier.fillMaxWidth().height(56.dp),
+                shape = RoundedCornerShape(12.dp)
             ) {
                 Text(
-                    text = "Pay with PayPal",
+                    text = stringResource(R.string.paypal_pago),
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimary
+                    fontWeight = FontWeight.Bold
                 )
             }
         }

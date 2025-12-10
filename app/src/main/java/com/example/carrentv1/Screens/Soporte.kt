@@ -13,13 +13,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.carrentv1.Navegation.AppScreens
+import com.example.carrentv1.R
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,10 +29,14 @@ fun SoporteTecnicoScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Soporte Técnico", color = MaterialTheme.colorScheme.onPrimary) },
+                title = { Text(stringResource(R.string.soporte_tecnico), color = MaterialTheme.colorScheme.onPrimary) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver", tint = MaterialTheme.colorScheme.onPrimary)
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = stringResource(R.string.volver),
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
@@ -42,7 +48,7 @@ fun SoporteTecnicoScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
-                .padding(paddingValues) // Aplicar paddingValues del Scaffold
+                .padding(paddingValues)
                 .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(24.dp)
@@ -50,13 +56,13 @@ fun SoporteTecnicoScreen(navController: NavController) {
             // Logo de soporte
             Image(
                 painter = painterResource(id = com.example.carrentv1.R.drawable.soporte),
-                contentDescription = "Soporte Técnico",
+                contentDescription = stringResource(R.string.img_soporte),
                 modifier = Modifier.size(120.dp)
             )
 
             // Título principal
             Text(
-                text = "Soporte Técnico",
+                text = stringResource(R.string.soporte_tecnico),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary,
@@ -67,7 +73,7 @@ fun SoporteTecnicoScreen(navController: NavController) {
 
             // Subtítulo
             Text(
-                text = "Herramientas de soporte",
+                text = stringResource(R.string.herramientas_soporte),
                 fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center,
@@ -81,30 +87,27 @@ fun SoporteTecnicoScreen(navController: NavController) {
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Restablecer Contraseña
+                // Restablecer contraseña
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { navController.navigate(route = AppScreens.RecuperarContra.route) },
+                        .clickable { navController.navigate(AppScreens.RecuperarContra.route) },
                     shape = RoundedCornerShape(12.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
                     Row(
-                        modifier = Modifier
-                            .padding(20.dp)
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start
+                        modifier = Modifier.padding(20.dp).fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
                             modifier = Modifier
                                 .size(24.dp)
-                                .background(Color(0xFFFFA20A), RoundedCornerShape(4.dp)) // Color fijo
+                                .background(Color(0xFFFFA20A), RoundedCornerShape(4.dp))
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         Text(
-                            text = "Restablecer Contraseña",
+                            text = stringResource(R.string.restablecer_contrasena),
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.onSurface
@@ -116,26 +119,23 @@ fun SoporteTecnicoScreen(navController: NavController) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable {navController.navigate(route = AppScreens.PreguntasFre.route) },
+                        .clickable { navController.navigate(AppScreens.PreguntasFre.route) },
                     shape = RoundedCornerShape(12.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
                     Row(
-                        modifier = Modifier
-                            .padding(20.dp)
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start
+                        modifier = Modifier.padding(20.dp).fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
                             modifier = Modifier
                                 .size(24.dp)
-                                .background(Color(0xFFCEAC0C), RoundedCornerShape(4.dp)) // Color fijo
+                                .background(Color(0xFFCEAC0C), RoundedCornerShape(4.dp))
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         Text(
-                            text = "Preguntas frecuentes",
+                            text = stringResource(R.string.preguntas_frecuentes),
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.onSurface
@@ -147,26 +147,23 @@ fun SoporteTecnicoScreen(navController: NavController) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { /* Acción para reportar problema */ },
+                        .clickable { /* Acción futura */ },
                     shape = RoundedCornerShape(12.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
                     Row(
-                        modifier = Modifier
-                            .padding(20.dp)
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start
+                        modifier = Modifier.padding(20.dp).fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
                             modifier = Modifier
                                 .size(24.dp)
-                                .background(Color(0xFFCE700C), RoundedCornerShape(4.dp)) // Color fijo
+                                .background(Color(0xFFCE700C), RoundedCornerShape(4.dp))
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         Text(
-                            text = "Reportar un problema",
+                            text = stringResource(R.string.reportar_problema),
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.onSurface
